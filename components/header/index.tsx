@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { useUser } from '@auth0/nextjs-auth0';
 import { UserIcon } from '../../assets/icons';
+import { getUser } from '@common/utils';
 
 const Header = () => {
-  const userMetadata = useUser();
+  const userMetadata = getUser();
 
   return (
     <nav className="bg-gray-800">

@@ -28,13 +28,17 @@ export function createRoomId(): RoomId {
 }
 
 export function getUser(): any {
-   let userStr = localStorage.getItem('curUser')
+  let userStr = null
+  if (typeof localStorage != "undefined")
+    userStr = localStorage.getItem('curUser')
    let obj
    if (userStr){
      obj = JSON.parse(userStr)
    }else{
     let id = createRoomId()
      obj = {name: id, picture:"", id:id,    muted: false,    visible:false}
+     if (typeof localStorage != "undefined")
+
     localStorage.setItem('curUser', JSON.stringify(obj))
    }
   // console.log("getuser", obj)

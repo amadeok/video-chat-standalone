@@ -1,8 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
 import { toast } from 'react-toastify';
 
-import { append } from '@common/utils';
+import { append, getUser } from '@common/utils';
 import { useMediaStream } from '@hooks/index';
 
 import { SocketContext } from '@pages/_app';
@@ -20,7 +19,7 @@ export default function UsersConnectionProvider({
   children,
 }: any) {
   const router = useRouter();
-  const user = useUser().user!;
+  const user = getUser()
 
   const socket = useContext(SocketContext);
   const { streams } = useContext(UsersStateContext);

@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { useUser } from '@auth0/nextjs-auth0';
 import { useMediaStream } from '@hooks/index';
 import { SocketContext } from '@pages/_app';
 import { useRouter } from 'next/router';
@@ -16,9 +15,7 @@ import { createRoomId, error, getUser } from '@common/utils';
 const usePeer = (stream: MediaStream) => {
   const socket = useContext(SocketContext);
   const room = useRouter().query.qoraId as RoomId;
- // const user = useUser().user!;
-  const uuser = useUser()
-  const user = uuser &&uuser.user ?    uuser.user!.name || '' : getUser();;
+  const user =  getUser();;
   
   const { muted, visible } = useMediaStream(stream);
 
