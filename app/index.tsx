@@ -113,7 +113,7 @@ export default function App({ stream }: { stream: MediaStream }) {
   return (
     <div className="flex">
       <UsersSettingsProvider>
-        <div className="sm:flex hidden flex-col p-4 w-full h-screen">
+        <div className="sm:flex _hidden flex-col p-4 w-full h-screen">
           <UsersConnectionProvider stream={stream} myId={myId} peer={peer}>
             <div className="flex h-full place-items-center place-content-center gap-4">
               <SharedScreenStream
