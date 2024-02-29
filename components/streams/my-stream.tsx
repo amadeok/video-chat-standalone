@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { useUser } from '@auth0/nextjs-auth0';
+//import { useUser } from '@auth0/nextjs-auth0';
 
 import { MYSELF } from '@common/constants';
 import { UsersConnectionContext } from 'contexts/users-connection';
@@ -16,8 +16,8 @@ export default function MyStream({
   muted: boolean;
   visible: boolean;
 }) {
-  const uuser = useUser()
-  const avatar = uuser &&uuser.user ?    uuser.user!.picture || '' : '';
+  const uuser = null //useUser()
+  const avatar =  '';
   const { myId } = useContext(UsersConnectionContext);
 
   return (

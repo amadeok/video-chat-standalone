@@ -16,7 +16,7 @@ const usePeer = (stream: MediaStream) => {
   const socket = useContext(SocketContext);
   const room = useRouter().query.qoraId as RoomId;
   const user =  getUser();;
-  
+  console.log("peer room id", room)
   const { muted, visible } = useMediaStream(stream);
 
   const [isLoading, setIsLoading] = useState(true);
@@ -24,33 +24,37 @@ const usePeer = (stream: MediaStream) => {
   const [myId, setMyId] = useState<PeerId>('');
 
   useEffect(() => {
+
     (async function createPeerAndJoinRoom() {
-      try {
-        const peer = new (await import('peerjs')).default();
-        setPeer(peer);
-        setIsLoading(false);
+      console.log("2peer room id", room)
+      if (room) {
+        try {
+          const peer = new (await import('peerjs')).default();
+          setPeer(peer);
+          setIsLoading(false);
 
-        peer.on('open', (id) => {
-          console.log('your device id: ', id);
-          setMyId(id);
-          socket.emit('room:join', {
-            room,
-            user: {
-              id,
-              muted,
-              visible,
-              name: user.name,
-              picture: user.picture,
-            },
+          peer.on('open', (id) => {
+            console.log('your device id: ', id);
+            setMyId(id);
+            socket.emit('room:join', {
+              room,
+              user: {
+                id,
+                muted,
+                visible,
+                name: user.name,
+                picture: user.picture,
+              },
+            });
           });
-        });
 
-        peer.on('error', error('Failed to setup peer connection'));
-      } catch (e) {
-        error('Unable to create peer')(e);
+          peer.on('error', error('Failed to setup peer connection'));
+        } catch (e) {
+          error('Unable to create peer')(e);
+        }
       }
     })();
-  }, []);
+  }, [room]);
 
   return {
     peer,

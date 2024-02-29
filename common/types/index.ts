@@ -6,7 +6,7 @@ import { DefaultEventsMap } from 'socket.io/dist/typed-events';
 import { Socket as ClientSocket } from 'socket.io-client';
 import Peer, { MediaConnection } from 'peerjs';
 import { Dispatch, SetStateAction } from 'react';
-import { UserContext } from '@auth0/nextjs-auth0';
+//import { UserContext } from '@auth0/nextjs-auth0';
 
 export type NextApiResponseServerIO = NextApiResponse & {
   socket: NetSocket & {
@@ -25,7 +25,7 @@ export type QoraContextType = {
   socket: TSocket;
   roomId: RoomId;
   peer: Peer;
-  user: Pick<UserContext, 'user'>;
+  user: any;// Pick<UserContext, 'user'>;
   isHost: boolean;
   stream: MediaStream;
   me: boolean;
