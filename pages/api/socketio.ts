@@ -6,7 +6,7 @@ import { SOCKET_PATH } from 'common/constants';
 
 let startTime: Date = new Date(); // Define the variable you want to monitor
 let endTime: Date = startTime;
-const desiredIntervalMins: number = 0.5;
+const desiredIntervalMins: number = 120;
 
 const AWS = require('aws-sdk');
 
