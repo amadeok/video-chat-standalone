@@ -3,20 +3,26 @@ import threading
 import os
 import signal
 
-def run_process():
-    # Run your process here
-    
-    global process
-    process = subprocess.Popen(['/home/ubuntu/loophole-cli_1.0.0-beta.15_linux_64bit/loophole', 'http', '3000', '--hostname', 'video-chat-ayurveda-108'],   stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+command =  ['/home/ubuntu/loophole-cli_1.0.0-beta.15_linux_64bit/loophole', 'http', '3000', '--hostname', 'video-chat-ayurveda-108']
 
-    # Monitor stdout for the desired output
-    while True:
-        line = process.stdout.readline()
-        if line:
-            print(line.decode().strip())  # Print the output
-            if b'Forwarding' in line:
-                print("FORWARD FOUND")
-                break  # Exit the loop if "Forwarding" is found
+def run_process():    
+    global process
+    global forwarded
+    try:
+        process = subprocess.Popen(command,
+                                    stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        # Monitor stdout for the desired output
+        while True:
+            line = process.stdout.readline()
+            if line:
+                print(line.decode().strip())  # Print the output
+                if b'Forwarding' in line:
+                    print("FORWARD FOUND")
+                    forwarded = True
+                    break  # Exit the loop if "Forwarding" is found
+    except Exception as e:
+        print("ex", e)
 
 def kill_process():
     if  process.poll() is None:
@@ -37,3 +43,5 @@ while True:
         kill_process()
     else:
         break  # Exit the loop if the process completes successfully
+print("waiting for process to end..")
+process.wait()        
