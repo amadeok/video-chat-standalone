@@ -8,6 +8,7 @@ const nextConfig = {
               // matching all API routes
               source: "/api/hello",
               headers: [
+                { key: "ngrok-skip-browser-warning", value: "true" },
                   { key: "Access-Control-Allow-Credentials", value: "true" },
                   { key: "Access-Control-Allow-Origin", value: "*" }, // replace this your actual origin
                   { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
@@ -17,6 +18,7 @@ const nextConfig = {
           {
             source: "/qora/:path*", // This will match any route that starts with "/qora/"
             headers: [
+                { key: "ngrok-skip-browser-warning", value: "true" },
                 { key: "Access-Control-Allow-Credentials", value: "true" },
                 { key: "Access-Control-Allow-Origin", value: "*" }, // replace this with your actual origin
                 { key: "Access-Control-Allow-Methods", value: "GET,DELETE,PATCH,POST,PUT" },
