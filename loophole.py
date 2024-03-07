@@ -15,6 +15,7 @@ def run_process():
         if line:
             print(line.decode().strip())  # Print the output
             if b'Forwarding' in line:
+                print("FORWARD FOUND")
                 break  # Exit the loop if "Forwarding" is found
 
 def kill_process():
