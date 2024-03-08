@@ -20,6 +20,8 @@ def check_and_kill_process(process_name):
     print(f"Process '{process_name}' is not running.")
     return False
 
+
+
 class ProcessManager:
     def __init__(self):
         self.stop = False
@@ -48,7 +50,7 @@ class ProcessManager:
                 #print("1")
                 if line:
                     print(line.decode().strip())  # Print the output
-                    if b'Forwarding' in line:
+                    if b'Forwarding' in line or b'loophole.site' in line :
                         print("FORWARD FOUND")
                         self.forwarded = True
                         threading.Thread(target=self.logger, args=[self.process.stdout,]).start()
@@ -73,8 +75,8 @@ class ProcessManager:
             process_thread = threading.Thread(target=self.run_process, args=(command,))
             process_thread.start()
             process_thread.join(timeout=10)  # Wait for 10 seconds
-
-            if process_thread.is_alive():
+            time.sleep(1)
+            if  not self.forwarded: #process_thread.is_alive() and
                 # If the process is still running after 10 seconds, kill it
                 self.kill_process()
             else:
@@ -86,9 +88,6 @@ class ProcessManager:
 
 # Example usage:
 if __name__ == "__main__":
-    process_name = "loophole"
-    check_and_kill_process(process_name)
     process_manager = ProcessManager()
     #command = command
     process_manager.run(command)
-
