@@ -6,6 +6,20 @@ import time
 
 command =  ['/home/ubuntu/loophole-cli_1.0.0-beta.15_linux_64bit/loophole', 'http', '3000', '--hostname', 'video-chat-ayurveda-108']
 
+import psutil
+
+def check_and_kill_process(process_name):
+    # Iterate over all running processes
+    for proc in psutil.process_iter(['pid', 'name']):
+        if proc.info['name'] == process_name:
+            print(f"Process '{process_name}' is running with PID {proc.pid}. Killing...")
+            proc.kill()
+            print(f"Process '{process_name}' with PID {proc.pid} killed.")
+            return True
+    
+    print(f"Process '{process_name}' is not running.")
+    return False
+
 class ProcessManager:
     def __init__(self):
         self.stop = False
@@ -72,6 +86,8 @@ class ProcessManager:
 
 # Example usage:
 if __name__ == "__main__":
+    process_name = "loophole"
+    check_and_kill_process(process_name)
     process_manager = ProcessManager()
     #command = command
     process_manager.run(command)
