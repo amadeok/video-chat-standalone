@@ -15,12 +15,12 @@ class ProcessManager:
     def logger(self, source):
         while True:
             line = source.readline()
-            print("2")
+            #print("2")
             if line:
                 print(line.decode().strip())  # Print the output
             if self.stop:
                 break
-            time.sleep(0.1)
+            time.sleep(0.5)
             
 
     def run_process(self, command):
