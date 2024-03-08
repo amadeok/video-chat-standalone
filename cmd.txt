@@ -17,6 +17,11 @@ pm2 start npm --name "video-chat" -- start -p 3000
 pm2 start ngrok -- http --domain=top-duckling-roughly.ngrok-free.app 3000
 pm2 start /home/ubuntu/loophole-cli_1.0.0-beta.15_linux_64bit/loophole -- http 3000 --hostname video-chat-ayurveda-108
 
+
+pm2 start npm --name "video-chat" -- start -p 3000 
+
+pm2 start python3 --name "loophole"  -- /home/ubuntu/video-chat-standalone/loophole.py
+
 echo 
 
 ngrok tunnel --label edge=edghts_2d08YCX4Ceyp73DE1MYybxiR84E http://localhost:3000
